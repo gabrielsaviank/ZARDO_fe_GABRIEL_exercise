@@ -1,26 +1,10 @@
 import * as React from 'react';
-import {ListItem, Teams as TeamsList} from 'types';
 import {getTeams as fetchTeams} from '../api';
 import {Header} from '../components/Header';
 import {List} from '../components/List';
 import {Container} from '../components/GlobalComponents';
+import {MapTeams} from '../helpers/columnGenerators';
 
-const MapT = (teams: TeamsList[]) => {
-    return teams.map(team => {
-        const columns = [
-            {
-                key: 'Name',
-                value: team.name,
-            },
-        ];
-        return {
-            id: team.id,
-            url: `/team/${team.id}`,
-            columns,
-            navigationProps: team,
-        } as ListItem;
-    });
-};
 
 const Teams = () => {
     const [teams, setTeams] = React.useState<any>([]);
@@ -38,7 +22,7 @@ const Teams = () => {
     return (
         <Container>
             <Header title="Teams" showBackButton={false} />
-            <List items={MapT(teams)} isLoading={isLoading} />
+            <List items={MapTeams(teams)} isLoading={isLoading} />
         </Container>
     );
 };
