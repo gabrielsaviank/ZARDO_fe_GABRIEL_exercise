@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {useLocation} from 'react-router-dom';
 import {UserData} from 'types';
-import Card from '../components/Card';
+import {useMemo} from 'react';
+import {Card} from '../components/Card';
 import {Container} from '../components/GlobalComponents';
-import Header from '../components/Header';
+import {Header} from '../components/Header';
 
-var mapU = (user: UserData) => {
-    var columns = [
+const mapUserDataToColumns = (user: UserData) => {
+    return [
         {
             key: 'Name',
             value: `${user.firstName} ${user.lastName}`,
@@ -20,17 +21,30 @@ var mapU = (user: UserData) => {
             value: user.location,
         },
     ];
-    return <Card columns={columns} hasNavigation={false} navigationProps={user} />;
 };
 
 const UserOverview = () => {
     const location = useLocation();
+    const user = location.state;
+
+    const renderUserDetails = useMemo(() => {
+        const columns = mapUserDataToColumns(user);
+
+        return (
+            <Card
+                columns={columns}
+                hasNavigation={false}
+                navigationProps={user}
+            />
+        );
+    }, [user]);
+
     return (
         <Container>
             <Header
-                title={`User ${location.state.firstName} ${location.state.lastName}`}
+                title={`User ${user.firstName} ${user.lastName}`}
             />
-            {mapU(location.state)}
+            {renderUserDetails}
         </Container>
     );
 };

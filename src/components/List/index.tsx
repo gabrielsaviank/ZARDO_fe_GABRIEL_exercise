@@ -1,16 +1,10 @@
 import * as React from 'react';
-import {ListItem} from 'types';
-import Card from '../Card';
+import {Card} from '../Card';
 import {Spinner} from '../Spinner';
 import {Container} from './styles';
+import {ListType} from '../../types/ComponentsTypes';
 
-interface Props {
-    items?: ListItem[];
-    hasNavigation?: boolean;
-    isLoading: string;
-}
-
-const List = ({items, hasNavigation = true, isLoading}: Props) => {
+export const List = ({items, hasNavigation = true, isLoading}: ListType) => {
     return (
         <Container>
             {isLoading && <Spinner />}
@@ -30,5 +24,3 @@ const List = ({items, hasNavigation = true, isLoading}: Props) => {
         </Container>
     );
 };
-
-export default List;

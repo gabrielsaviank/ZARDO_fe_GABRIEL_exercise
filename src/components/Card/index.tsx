@@ -1,27 +1,23 @@
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Teams, UserData} from 'types';
 import {Container} from './styles';
+import {CardType} from '../../types/ComponentsTypes';
 
-interface Props {
-    id?: string;
-    url?: string;
-    columns: Array<{
-        key: string;
-        value: string;
-    }>;
-    hasNavigation?: boolean;
-    navigationProps?: UserData | Teams;
-}
-
-const Card = ({
-    id,
-    columns,
-    url,
-    hasNavigation = true,
-    navigationProps = null,
-}: Props): JSX.Element => {
+export const Card = ({
+     id,
+     columns,
+     url,
+     hasNavigation = true,
+     navigationProps = null,
+ }: CardType): JSX.Element => {
     const navigate = useNavigate();
+    const renderColumns = () => {
+        return columns.map(({key: columnKey, value}) => (
+            <p key={columnKey}>
+                <strong>{columnKey}</strong>&nbsp;{value}
+            </p>
+        ));
+    };
 
     return (
         <Container
@@ -36,13 +32,7 @@ const Card = ({
                 e.preventDefault();
             }}
         >
-            {columns.map(({key: columnKey, value}) => (
-                <p key={columnKey}>
-                    <strong>{columnKey}</strong>&nbsp;{value}
-                </p>
-            ))}
+            {renderColumns()}
         </Container>
     );
 };
-
-export default Card;
