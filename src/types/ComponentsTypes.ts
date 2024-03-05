@@ -1,3 +1,4 @@
+import {ChangeEvent} from 'react';
 import {ListItem, Teams, UserData} from './index';
 
 export type HeaderType = {
@@ -22,3 +23,8 @@ export type CardType = {
     navigationProps?: UserData | Teams;
 }
 
+export type TextInputType = {
+    label?: string;
+    value?: string;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
+}
