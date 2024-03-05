@@ -1,5 +1,5 @@
 import {ChangeEvent} from 'react';
-import {ListItem, Teams, UserData} from './index';
+import {ListItem, TeamsType, UserData} from './index';
 
 export type HeaderType = {
     title: string;
@@ -20,7 +20,7 @@ export type CardType = {
         value: string;
     }>;
     hasNavigation?: boolean;
-    navigationProps?: UserData | Teams;
+    navigationProps?: UserData | TeamsType;
 }
 
 export type TextInputType = {

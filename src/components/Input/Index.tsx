@@ -5,8 +5,9 @@ import {TextInputType} from '../../types/ComponentsTypes';
 export const Input: React.FC<TextInputType> = ({label,  value, onChange}) => {
     return(
         <TextInputContainer>
-            <Label>{label}</Label>
+            <Label htmlFor="input">{label}</Label>
             <InputField
+                id="input"
                 type="text"
                 value={value}
                 onChange={onChange}
