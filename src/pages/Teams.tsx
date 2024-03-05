@@ -47,7 +47,10 @@ const Teams = () => {
                 hasFilters
             />
             <List
-                items={MapTeams(filteredItems.length > 0 ? filteredItems : teams)}
+                items={MapTeams(
+                    filteredItems.length > 0 ?
+                        filteredItems : teams
+                )}
                 isLoading={isLoading}
             />
         </Container>
