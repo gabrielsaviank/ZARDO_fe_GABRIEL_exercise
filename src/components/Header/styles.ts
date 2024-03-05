@@ -1,31 +1,38 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-    height: 100px;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+`;
 
 export const NavigationHeader = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 10px;
 `;
 
 export const BackButton = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px;
-    font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    outline: 0;
+`;
+
+export const SubmitButton = styled.button`
+  padding: 10px 20px ;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 `;

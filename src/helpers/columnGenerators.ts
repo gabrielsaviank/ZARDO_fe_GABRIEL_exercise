@@ -1,6 +1,6 @@
 import {
     ListItem,
-    Teams as TeamsList,
+    TeamsType as TeamsList,
     UserData,
 } from '../types';
 

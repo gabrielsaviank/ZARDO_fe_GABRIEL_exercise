@@ -9,7 +9,13 @@ export const List = ({items, hasNavigation = true, isLoading}: ListType) => {
         <Container>
             {isLoading && <Spinner />}
             {!isLoading &&
-                items.map(({url, id, columns, navigationProps}, index) => {
+                items.map((
+                    {
+                        url,
+                        id,
+                        columns,
+                        navigationProps}, index
+                ) => {
                     return (
                         <Card
                             key={`${id}-${index}`}

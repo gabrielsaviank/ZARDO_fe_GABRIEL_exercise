@@ -1,4 +1,4 @@
-export interface Teams {
+export type TeamsType = {
     id: string;
     name: string;
 }
@@ -27,5 +27,5 @@ export interface ListItem {
     id: string;
     url?: string;
     columns: Array<ListItemColumn>;
-    navigationProps?: UserData | Teams;
+    navigationProps?: UserData | TeamsType;
 }
