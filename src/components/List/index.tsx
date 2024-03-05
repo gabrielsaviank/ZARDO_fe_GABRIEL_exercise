@@ -4,7 +4,7 @@ import {Spinner} from '../Spinner';
 import {Container} from './styles';
 import {ListType} from '../../types/ComponentsTypes';
 
-export const List = ({items, hasNavigation = true, isLoading}: ListType) => {
+export const List = ({items, hasNavigation = true, isLoading, type}: ListType) => {
     return (
         <Container>
             {isLoading && <Spinner />}
@@ -24,6 +24,7 @@ export const List = ({items, hasNavigation = true, isLoading}: ListType) => {
                             navigationProps={navigationProps}
                             hasNavigation={hasNavigation}
                             url={url}
+                            cardStyle={type}
                         />
                     );
                 })}

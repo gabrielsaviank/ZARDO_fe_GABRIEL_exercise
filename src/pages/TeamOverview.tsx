@@ -78,6 +78,7 @@ const TeamOverview = () => {
                                 : teamData?.teamMembers ?? []
                         )}
                         isLoading={isLoading}
+                        type="member"
                     />
                 </React.Fragment>
             )}

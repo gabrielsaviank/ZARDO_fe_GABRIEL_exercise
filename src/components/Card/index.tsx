@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Container} from './styles';
+import {Container, Title, Text, Content} from './styles';
 import {CardType} from '../../types/ComponentsTypes';
 
 export const Card = ({
@@ -9,13 +9,24 @@ export const Card = ({
      url,
      hasNavigation = true,
      navigationProps = null,
+    cardStyle,
  }: CardType): JSX.Element => {
     const navigate = useNavigate();
     const renderColumns = () => {
         return columns.map(({key: columnKey, value}) => (
-            <p key={columnKey}>
-                <strong>{columnKey}</strong>&nbsp;{value}
-            </p>
+            <Content key={columnKey}>
+                {cardStyle === 'team' ? (
+                    <React.Fragment>
+                        <Title>👨‍👨‍👦 Team</Title>
+                        <Text>{value}</Text>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        <Title>{columnKey}</Title>
+                        <Text>{value}</Text>
+                    </React.Fragment>
+                )}
+            </Content>
         ));
     };
 

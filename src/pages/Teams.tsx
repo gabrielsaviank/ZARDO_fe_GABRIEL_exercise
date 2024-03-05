@@ -14,13 +14,15 @@ const Teams = () => {
     const [filteredItems, setFilteredItems] = useState<TeamsType[]>([]);
 
     useEffect(() => {
-        const getTeams = async () => {
-            const response = await fetchTeams();
-            setTeams(response);
-            setIsLoading(false);
-        };
-
-        getTeams();
+        (async () => {
+            try {
+                const response = await fetchTeams();
+                setTeams(response);
+                setIsLoading(false);
+            } catch (exception) {
+                throw new Error('Error fetching teams', exception);
+            }
+        })();
     }, []);
 
     const filterItems = (value: string) => {
@@ -52,6 +54,7 @@ const Teams = () => {
                         filteredItems : teams
                 )}
                 isLoading={isLoading}
+                type="team"
             />
         </Container>
     );
