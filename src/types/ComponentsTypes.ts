@@ -4,6 +4,7 @@ import {ListItem, TeamsType, UserData} from './index';
 export type HeaderType = {
     title: string;
     showBackButton?: boolean;
+    hasFilters?: boolean;
     inputValue?: any;
     onSubmit?: any;
 }

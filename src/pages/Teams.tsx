@@ -44,6 +44,7 @@ const Teams = () => {
                 inputValue={inputValue}
                 onInputChange={handleInputChange}
                 onSubmit={handleSubmit}
+                hasFilters
             />
             <List
                 items={MapTeams(filteredItems.length > 0 ? filteredItems : teams)}

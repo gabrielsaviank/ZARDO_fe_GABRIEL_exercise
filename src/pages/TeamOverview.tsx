@@ -15,7 +15,8 @@ const TeamOverview = () => {
 
     return (
         <Container>
-            <Header title={`Team ${location.state.name}`} />
+            <Header
+                title={`Team ${location.state.name}`} />
             {!isLoading && (
                 <Card
                     columns={MapLeads(teamData.teamLead)}

@@ -5,9 +5,13 @@ import {
     NavigationHeader,
     BackButton,
     Title,
+    SubmitButton,
 } from './styles';
 import {HeaderType} from '../../types/ComponentsTypes';
 import {Input} from '../Input/Index';
+
+
+
 
 export const Header = ({
    title,
@@ -15,6 +19,7 @@ export const Header = ({
    inputValue,
    onInputChange,
    onSubmit,
+    hasFilters,
     }: HeaderType & {
     inputValue?: string,
     onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -30,16 +35,24 @@ export const Header = ({
             <NavigationHeader>
                 {showBackButton && (
                     <BackButton onClick={handleBackButton}>
-                        🔙
+                        <span role="img" aria-label="Back">&#9664;</span> Back
                     </BackButton>
                 )}
                 <Title>{title}</Title>
-                <Input
-                    label="Search"
-                    value={inputValue}
-                    onChange={onInputChange}
-                />
-                <button type="button" onClick={onSubmit}>Submit</button>
+                {hasFilters && (
+                    <React.Fragment>
+                        <Input
+                            value={inputValue}
+                            onChange={onInputChange}
+                        />
+                        <SubmitButton
+                            type="button"
+                            onClick={onSubmit}
+                        >
+                            Filter
+                        </SubmitButton>
+                    </React.Fragment>
+                )}
             </NavigationHeader>
         </HeaderContainer>
     );

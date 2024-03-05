@@ -10,6 +10,7 @@ export const Input: React.FC<TextInputType> = ({label,  value, onChange}) => {
                 id="input"
                 type="text"
                 value={value}
+                placeholder="Filter results"
                 onChange={onChange}
             />
         </TextInputContainer>
