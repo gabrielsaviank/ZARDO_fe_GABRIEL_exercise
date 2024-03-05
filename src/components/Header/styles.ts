@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-    height: 80px;
     padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #333;
     color: #fff;
-    width: 90%;
+    width: 100%;
 `;
+
 export const Title = styled.h1`
     font-size: 24px;
     margin: 0;
     text-align: center;
+    flex-grow: 1;
 `;
 
 export const NavigationHeader = styled.div`

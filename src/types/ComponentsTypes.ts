@@ -4,12 +4,15 @@ import {ListItem, TeamsType, UserData} from './index';
 export type HeaderType = {
     title: string;
     showBackButton?: boolean;
+    inputValue?: any;
+    onSubmit?: any;
 }
 
 export type ListType = {
     items?: ListItem[];
     hasNavigation?: boolean;
     isLoading?: boolean;
+    filter?: any;
 }
 
 export type CardType = {

@@ -7,12 +7,22 @@ import {
     Title,
 } from './styles';
 import {HeaderType} from '../../types/ComponentsTypes';
+import {Input} from '../Input/Index';
 
-export const Header = ({title, showBackButton = true}: HeaderType) => {
+export const Header = ({
+   title,
+   showBackButton = true,
+   inputValue,
+   onInputChange,
+   onSubmit,
+    }: HeaderType & {
+    inputValue?: string,
+    onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    onSubmit?: () => void }) => {
     const navigate = useNavigate();
 
     const handleBackButton = () => {
-        navigate( -1);
+        navigate(-1);
     };
 
     return (
@@ -24,8 +34,13 @@ export const Header = ({title, showBackButton = true}: HeaderType) => {
                     </BackButton>
                 )}
                 <Title>{title}</Title>
+                <Input
+                    label="Search"
+                    value={inputValue}
+                    onChange={onInputChange}
+                />
+                <button type="button" onClick={onSubmit}>Submit</button>
             </NavigationHeader>
         </HeaderContainer>
     );
 };
-
