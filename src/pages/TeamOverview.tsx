@@ -16,18 +16,26 @@ const TeamOverview = () => {
     const [inputValue, setInputValue] = useState<string>('');
     const [filteredItems, setFilteredItems] = useState<any[]>([]);
 
-
-    console.log('TEAM DATA', teamData);
-
     const filterItems = (value: string) => {
         const filteredTeamMembers = teamData.teamMembers.filter(member =>
             member.firstName.toLowerCase().includes(value.toLowerCase())
         );
-        setFilteredItems(filteredTeamMembers);
+
+        const filteredTeamLead = teamData.teamLead.firstName
+            .toLowerCase()
+            .includes(value.toLowerCase()) ? [teamData.teamLead] : [];
+
+        const filteredName = [...filteredTeamLead, ...filteredTeamMembers];
+
+        setFilteredItems(filteredName);
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
+
+        if(event.target.value === '') {
+            setFilteredItems([]);
+        }
     };
 
     const handleSubmit = () => {
@@ -43,7 +51,7 @@ const TeamOverview = () => {
                 onSubmit={handleSubmit}
                 hasFilters
             />
-            {!isLoading && (
+            {(!isLoading && filteredItems.length === 0) && (
                 <Card
                     columns={MapLeads(teamData.teamLead)}
                     url={`/user/${teamData.teamLead.id}`}
