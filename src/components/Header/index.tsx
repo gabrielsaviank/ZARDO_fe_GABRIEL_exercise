@@ -14,16 +14,13 @@ import {Input} from '../Input/Index';
 
 
 export const Header = ({
-   title,
-   showBackButton = true,
-   inputValue,
-   onInputChange,
-   onSubmit,
-    hasFilters,
-    }: HeaderType & {
-    inputValue?: string,
-    onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    onSubmit?: () => void }) => {
+       title,
+       showBackButton = true,
+       inputValue,
+       onInputChange,
+       onSubmit,
+       hasFilters,
+    }: HeaderType) => {
     const navigate = useNavigate();
 
     const handleBackButton = () => {

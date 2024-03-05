@@ -6,7 +6,7 @@ import {Header} from '../components/Header';
 import {List} from '../components/List';
 import useTeamData from '../components/hooks/useTeamData';
 import {MapLeads, MapMembers} from '../helpers/columnGenerators';
-import {TeamsType} from '../types';
+import {UserData} from '../types';
 
 
 const TeamOverview = () => {
@@ -14,7 +14,8 @@ const TeamOverview = () => {
     const {teamId} = useParams();
     const {teamData, isLoading} = useTeamData(teamId);
     const [inputValue, setInputValue] = useState<string>('');
-    const [filteredItems, setFilteredItems] = useState<any[]>([]);
+    const [filteredItems, setFilteredItems] = useState<UserData[]>([]);
+
 
     const filterItems = (value: string) => {
         const filteredTeamMembers = teamData.teamMembers.filter(member =>

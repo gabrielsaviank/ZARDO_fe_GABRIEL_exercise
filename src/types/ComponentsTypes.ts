@@ -1,12 +1,14 @@
 import {ChangeEvent} from 'react';
+import * as React from 'react';
 import {ListItem, TeamsType, UserData} from './index';
 
 export type HeaderType = {
     title: string;
     showBackButton?: boolean;
     hasFilters?: boolean;
-    inputValue?: any;
-    onSubmit?: any;
+    inputValue?: string;
+    onSubmit?: () => void;
+    onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 export type ListType = {
