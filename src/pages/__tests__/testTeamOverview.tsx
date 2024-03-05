@@ -6,10 +6,12 @@ import TeamOverview from '../TeamOverview';
 jest.mock('react-router-dom', () => ({
     useLocation: () => ({
         state: {
-            teamName: 'Some Team',
+            id: '1',
+            name: 'Some Team',
         },
     }),
     useNavigate: () => ({}),
+
     useParams: () => ({
         teamId: '1',
     }),
@@ -34,6 +36,7 @@ describe('TeamOverview', () => {
             teamLeadId: '2',
             teamMemberIds: ['3', '4', '5'],
         };
+
         const userData = {
             id: '2',
             firstName: 'userData',
