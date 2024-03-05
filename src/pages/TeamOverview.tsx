@@ -15,7 +15,7 @@ const TeamOverview = () => {
     const {teamData, isLoading} = useTeamData(teamId);
     const [inputValue, setInputValue] = useState<string>('');
     const [filteredItems, setFilteredItems] = useState<UserData[]>([]);
-
+    const [noMemberFound, setNoMemberFound] = useState<boolean>(false);
 
     const filterItems = (value: string) => {
         const filteredTeamMembers = teamData.teamMembers.filter(member =>
@@ -28,6 +28,13 @@ const TeamOverview = () => {
 
         const filteredName = [...filteredTeamLead, ...filteredTeamMembers];
 
+        if(filteredName.length === 0){
+            setNoMemberFound(true);
+            setFilteredItems([]);
+        } else {
+            setNoMemberFound(false);
+            setFilteredItems(filteredName);
+        }
         setFilteredItems(filteredName);
     };
 
@@ -35,6 +42,7 @@ const TeamOverview = () => {
         setInputValue(event.target.value);
 
         if(event.target.value === '') {
+            setNoMemberFound(false);
             setFilteredItems([]);
         }
     };
@@ -52,21 +60,27 @@ const TeamOverview = () => {
                 onSubmit={handleSubmit}
                 hasFilters
             />
-            {(!isLoading && filteredItems.length === 0) && (
-                <Card
-                    columns={MapLeads(teamData.teamLead)}
-                    url={`/user/${teamData.teamLead.id}`}
-                    navigationProps={teamData.teamLead}
-                />
+            {noMemberFound ? (
+                <h1>User Not found</h1>
+            ) : (
+                <React.Fragment>
+                    {!isLoading && filteredItems.length === 0 && (
+                        <Card
+                            columns={MapLeads(teamData.teamLead)}
+                            url={`/user/${teamData.teamLead.id}`}
+                            navigationProps={teamData.teamLead}
+                        />
+                    )}
+                    <List
+                        items={MapMembers(
+                            filteredItems.length > 0
+                                ? filteredItems
+                                : teamData?.teamMembers ?? []
+                        )}
+                        isLoading={isLoading}
+                    />
+                </React.Fragment>
             )}
-            <List
-                items={
-                    MapMembers(filteredItems.length > 0 ?
-                    filteredItems :
-                    teamData?.teamMembers ?? [])
-                }
-                isLoading={isLoading}
-            />
         </Container>
     );
 };

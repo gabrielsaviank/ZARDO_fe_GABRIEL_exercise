@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {
     HeaderContainer,
@@ -9,9 +9,6 @@ import {
 } from './styles';
 import {HeaderType} from '../../types/ComponentsTypes';
 import {Input} from '../Input/Index';
-
-
-
 
 export const Header = ({
        title,
