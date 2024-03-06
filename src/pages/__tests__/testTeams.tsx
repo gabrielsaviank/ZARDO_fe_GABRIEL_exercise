@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {render, screen, waitFor} from '@testing-library/react';
-import * as API from '../../api';
 import Teams from '../Teams';
+import {TeamsType} from '../../types';
+import TeamsContext from '../../contexts/TeamsContext';
 
 jest.mock('react-router-dom', () => ({
     useLocation: () => ({
@@ -29,11 +30,21 @@ describe('Teams', () => {
     });
 
     it('should render spinner while loading', async () => {
-        // TODO - Add code for this test
+        const isLoading = true;
+
+        render(
+            <TeamsContext.Provider value={{teams: [], isLoading}}>
+                <Teams/>
+            </TeamsContext.Provider>
+        );
+
+        await waitFor(() => {
+           expect(screen.getByTestId('spinner')).toBeInTheDocument();
+        });
     });
 
     it('should render teams list', async () => {
-        jest.spyOn(API, 'getTeams').mockResolvedValue([
+        const teams: TeamsType[] = [
             {
                 id: '1',
                 name: 'Team1',
@@ -42,13 +53,19 @@ describe('Teams', () => {
                 id: '2',
                 name: 'Team2',
             },
-        ]);
+        ];
+        const isLoading = false;
 
-        render(<Teams />);
+        render(
+            <TeamsContext.Provider value={{teams, isLoading}}>
+                <Teams />
+            </TeamsContext.Provider>
+        );
 
         await waitFor(() => {
             expect(screen.getByText('Team1')).toBeInTheDocument();
+            // eslint-disable-next-line testing-library/no-wait-for-multiple-assertions
+            expect(screen.getByText('Team2')).toBeInTheDocument();
         });
-        expect(screen.getByText('Team2')).toBeInTheDocument();
     });
 });
