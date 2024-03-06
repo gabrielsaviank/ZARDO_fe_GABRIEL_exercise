@@ -14,13 +14,18 @@ export const Container = styled.div<{ hasNavigation: boolean }>`
     margin: 5px;
 
     &:hover {
-        background-color: grey;
-        border-color: #333;
+        background-color: #c5c7c5;
+        border-color: white;
     }
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<{ cardStyle: string }>`
     display: flex;
+`;
+
+export const TeamContent = styled.div<{ cardStyle: string }>`
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const Title = styled.h2`
