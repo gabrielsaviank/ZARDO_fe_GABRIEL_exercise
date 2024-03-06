@@ -1,38 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {getTeams as fetchTeams} from '../api';
+import React, {useContext, useState} from 'react';
 import {Header} from '../components/Header';
 import {List} from '../components/List';
 import {Container} from '../components/GlobalComponents';
 import {MapTeams} from '../helpers/columnGenerators';
 import {TeamsType} from '../types';
+import TeamsContext from '../contexts/TeamsContext';
 
 
 const Teams = () => {
-    const [teams, setTeams] = useState<TeamsType[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const {teams, isLoading} = useContext(TeamsContext);
     const [inputValue, setInputValue] = useState<string>('');
     const [filteredItems, setFilteredItems] = useState<TeamsType[]>([]);
     const [noTeamFound, setNoTeamFound] = useState<boolean>(false);
-
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await fetchTeams();
-                setTeams(response);
-                setIsLoading(false);
-            } catch (exception) {
-                throw new Error('Error fetching teams', exception);
-            }
-        })();
-    }, []);
 
     const filterItems = (value: string) => {
         const filteredTeams = teams.filter(team =>
             team.name.toLowerCase().includes(value.toLowerCase())
         );
 
-        if(filteredItems.length === 0){
+        if(filteredTeams.length === 0){
             setNoTeamFound(true);
             setFilteredItems([]);
         } else {
@@ -43,6 +29,7 @@ const Teams = () => {
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
+
         if(event.target.value === '') {
             setNoTeamFound(false);
             setFilteredItems([]);
@@ -63,9 +50,9 @@ const Teams = () => {
                 onSubmit={handleSubmit}
                 hasFilters
             />
-            {noTeamFound ? (
+             {noTeamFound ? (
                 <h1>Team Not found</h1>
-            ) : (
+             ) : (
                 <List
                     items={MapTeams(
                         filteredItems.length > 0 ?
@@ -74,7 +61,7 @@ const Teams = () => {
                     isLoading={isLoading}
                     type="team"
                 />
-            )}
+             )}
         </Container>
     );
 };

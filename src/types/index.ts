@@ -29,3 +29,8 @@ export interface ListItem {
     columns: Array<ListItemColumn>;
     navigationProps?: UserData | TeamsType;
 }
+
+export type TeamsContextType = {
+    teams: TeamsType[];
+    isLoading: boolean;
+}
