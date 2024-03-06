@@ -13,6 +13,7 @@ jest.mock('react-router-dom', () => ({
             location: 'location',
         },
     }),
+
     useNavigate: () => ({}),
 }));
 
@@ -64,7 +65,9 @@ describe('Teams', () => {
 
         await waitFor(() => {
             expect(screen.getByText('Team1')).toBeInTheDocument();
-            // eslint-disable-next-line testing-library/no-wait-for-multiple-assertions
+        });
+
+        await waitFor(() => {
             expect(screen.getByText('Team2')).toBeInTheDocument();
         });
     });
