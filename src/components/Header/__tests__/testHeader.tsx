@@ -47,4 +47,22 @@ describe('Header', () => {
 
         expect(mockUseNavigate).toHaveBeenCalled();
     });
+
+    it('should render submit button and input filter in the header', () => {
+        const handleInputChange = jest.fn();
+        const handleSubmit = jest.fn();
+
+        render(
+            <Header
+                title="Header"
+                inputValue="test value"
+                onInputChange={handleInputChange}
+                onSubmit={handleSubmit}
+                hasFilters
+            />
+        );
+
+        expect(screen.getByRole('textbox')).toBeInTheDocument();
+        expect(screen.getByTestId('submit-filter')).toBeInTheDocument();
+    });
 });

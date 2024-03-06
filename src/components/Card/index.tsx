@@ -17,7 +17,7 @@ export const Card = ({
         return columns.map(({key: columnKey, value}) => (
             cardStyle === 'team' ? (
                 <TeamContent key={columnKey}>
-                    <Title>👨‍👨‍👦 Team</Title>
+                    <Title>‍👥 Team</Title>
                     <Text style={{color: '#5c5c5c'}}>{value}</Text>
                 </TeamContent>
             ) : (

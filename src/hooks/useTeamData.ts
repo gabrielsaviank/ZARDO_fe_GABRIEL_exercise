@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import {getTeamOverview, getUserData} from '../../api';
-import{UserData} from '../../types';
+import {getTeamOverview, getUserData} from '../api';
+import{UserData} from '../types';
 
 export type PageState = {
     teamLead?: UserData;

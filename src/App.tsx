@@ -3,6 +3,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import TeamOverview from './pages/TeamOverview';
 import Teams from './pages/Teams';
 import UserOverview from './pages/UserOverview';
+import {TeamsProvider} from './contexts/TeamsContext';
 
 const App = () => {
     const router = createBrowserRouter([
@@ -15,12 +16,16 @@ const App = () => {
             element: <TeamOverview />,
         },
         {
-            path: '/user/:useId',
+            path: '/user/:userId',
             element: <UserOverview />,
         },
     ]);
 
-    return <RouterProvider router={router} />;
+    return (
+        <TeamsProvider>
+            <RouterProvider router={router} />
+        </TeamsProvider>
+    );
 };
 
 export default App;
