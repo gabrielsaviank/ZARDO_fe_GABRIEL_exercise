@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {fireEvent, render, screen, waitFor} from '@testing-library/react';
-import * as API from '../../api';
 import TeamOverview from '../TeamOverview';
 import useTeamData from '../../hooks/useTeamData';
 
