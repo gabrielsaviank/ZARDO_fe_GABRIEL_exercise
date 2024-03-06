@@ -15,7 +15,6 @@ export type ListType = {
     items?: ListItem[];
     hasNavigation?: boolean;
     isLoading?: boolean;
-    filter?: any;
     type?: string;
 }
 
