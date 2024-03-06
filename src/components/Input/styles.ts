@@ -6,7 +6,7 @@ export const TextInputContainer = styled.div`
 
 export const InputField = styled.input`
     padding: 10px;
-    margin: 10px;
+    margin-right: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;

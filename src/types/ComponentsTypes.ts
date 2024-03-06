@@ -15,7 +15,7 @@ export type ListType = {
     items?: ListItem[];
     hasNavigation?: boolean;
     isLoading?: boolean;
-    filter?: any;
+    type?: string;
 }
 
 export type CardType = {
@@ -27,6 +27,7 @@ export type CardType = {
     }>;
     hasNavigation?: boolean;
     navigationProps?: UserData | TeamsType;
+    cardStyle?: string;
 }
 
 export type TextInputType = {

@@ -29,7 +29,7 @@ export const Header = ({
             <NavigationHeader>
                 {showBackButton && (
                     <BackButton onClick={handleBackButton}>
-                        <span role="img" aria-label="Back">&#9664;</span> Back
+                         <span role="img" aria-label="Back">&#9664;</span>
                     </BackButton>
                 )}
                 <Title>{title}</Title>

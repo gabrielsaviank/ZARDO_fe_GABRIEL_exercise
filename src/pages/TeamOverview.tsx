@@ -35,7 +35,6 @@ const TeamOverview = () => {
             setNoMemberFound(false);
             setFilteredItems(filteredName);
         }
-        setFilteredItems(filteredName);
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,6 +77,7 @@ const TeamOverview = () => {
                                 : teamData?.teamMembers ?? []
                         )}
                         isLoading={isLoading}
+                        type="member"
                     />
                 </React.Fragment>
             )}
