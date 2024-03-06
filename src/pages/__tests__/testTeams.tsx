@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render, screen, waitFor} from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import Teams from '../Teams';
 import {TeamsType} from '../../types';
 import TeamsContext from '../../contexts/TeamsContext';
@@ -69,6 +69,35 @@ describe('Teams', () => {
 
         await waitFor(() => {
             expect(screen.getByText('Team2')).toBeInTheDocument();
+        });
+    });
+
+    it('should filter a team', async () => {
+        const teams: TeamsType[] = [
+            {
+                id: '1',
+                name: 'Team1',
+            },
+            {
+                id: '2',
+                name: 'Team2',
+            },
+        ];
+        const isLoading = false;
+
+        render(
+            <TeamsContext.Provider value={{teams, isLoading}}>
+                <Teams />
+            </TeamsContext.Provider>
+        );
+
+        const inputElement = screen.getByPlaceholderText('Filter results');
+        fireEvent.change(inputElement, {target: {value: 'Team1'}});
+
+        fireEvent.submit(screen.getByTestId('submit-filter'));
+
+        await waitFor(() => {
+            expect(screen.getByText('Team1')).toBeInTheDocument();
         });
     });
 });

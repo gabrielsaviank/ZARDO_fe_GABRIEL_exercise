@@ -40,6 +40,7 @@ export const Header = ({
                             onChange={onInputChange}
                         />
                         <SubmitButton
+                            data-testid="submit-filter"
                             type="button"
                             onClick={onSubmit}
                         >
