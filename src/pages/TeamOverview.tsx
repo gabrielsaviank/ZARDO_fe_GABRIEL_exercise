@@ -35,7 +35,6 @@ const TeamOverview = () => {
             setNoMemberFound(false);
             setFilteredItems(filteredName);
         }
-        setFilteredItems(filteredName);
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

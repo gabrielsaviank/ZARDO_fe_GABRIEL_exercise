@@ -12,6 +12,8 @@ const Teams = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [inputValue, setInputValue] = useState<string>('');
     const [filteredItems, setFilteredItems] = useState<TeamsType[]>([]);
+    const [noTeamFound, setNoTeamFound] = useState<boolean>(false);
+
 
     useEffect(() => {
         (async () => {
@@ -26,12 +28,25 @@ const Teams = () => {
     }, []);
 
     const filterItems = (value: string) => {
-        const filteredTeams = teams.filter(team => team.name.toLowerCase().includes(value.toLowerCase()));
-        setFilteredItems(filteredTeams);
+        const filteredTeams = teams.filter(team =>
+            team.name.toLowerCase().includes(value.toLowerCase())
+        );
+
+        if(filteredItems.length === 0){
+            setNoTeamFound(true);
+            setFilteredItems([]);
+        } else {
+            setNoTeamFound(false);
+            setFilteredItems(filteredTeams);
+        }
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
+        if(event.target.value === '') {
+            setNoTeamFound(false);
+            setFilteredItems([]);
+        }
     };
 
     const handleSubmit = () => {
@@ -48,14 +63,18 @@ const Teams = () => {
                 onSubmit={handleSubmit}
                 hasFilters
             />
-            <List
-                items={MapTeams(
-                    filteredItems.length > 0 ?
-                        filteredItems : teams
-                )}
-                isLoading={isLoading}
-                type="team"
-            />
+            {noTeamFound ? (
+                <h1>Team Not found</h1>
+            ) : (
+                <List
+                    items={MapTeams(
+                        filteredItems.length > 0 ?
+                            filteredItems : teams
+                    )}
+                    isLoading={isLoading}
+                    type="team"
+                />
+            )}
         </Container>
     );
 };

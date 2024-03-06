@@ -18,7 +18,7 @@ export const Card = ({
             cardStyle === 'team' ? (
                 <TeamContent key={columnKey}>
                     <Title>👨‍👨‍👦 Team</Title>
-                    <Text>{value}</Text>
+                    <Text style={{color: '#5c5c5c'}}>{value}</Text>
                 </TeamContent>
             ) : (
                 <Content key={columnKey}>

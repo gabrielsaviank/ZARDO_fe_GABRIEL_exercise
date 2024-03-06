@@ -4,13 +4,15 @@ export const HeaderContainer = styled.div`
     background-color: #333;
     color: #fff;
     width: 100%;
+    height: 80px;
 `;
 
 export const Title = styled.h1`
     font-size: 24px;
-    margin: 0;
     text-align: center;
-    flex-grow: 1;
+    width: calc(100% - 100px);
+    margin-top: 10px;
+    margin-bottom: 10px;
 `;
 
 export const NavigationHeader = styled.div`
