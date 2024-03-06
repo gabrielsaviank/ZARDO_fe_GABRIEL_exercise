@@ -4,7 +4,7 @@ import {Card} from '../components/Card';
 import {Container} from '../components/GlobalComponents';
 import {Header} from '../components/Header';
 import {List} from '../components/List';
-import useTeamData from '../components/hooks/useTeamData';
+import useTeamData from '../hooks/useTeamData';
 import {MapLeads, MapMembers} from '../helpers/columnGenerators';
 import {UserData} from '../types';
 
