@@ -7,15 +7,18 @@ import {List} from '../components/List';
 import useTeamData from '../hooks/useTeamData';
 import {MapLeads, MapMembers} from '../helpers/columnGenerators';
 import {UserData} from '../types';
+import {Pagination} from '../components/Pagination/Pagination';
 
 
 const TeamOverview = () => {
     const location = useLocation();
     const {teamId} = useParams();
     const {teamData, isLoading} = useTeamData(teamId);
-    const [inputValue, setInputValue] = useState<string>('');
+    const [inputValue, setInputValue] = useState('');
     const [filteredItems, setFilteredItems] = useState<UserData[]>([]);
     const [noMemberFound, setNoMemberFound] = useState<boolean>(false);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const itemsPerPage = 30;
 
     const filterItems = (value: string) => {
         const filteredTeamMembers = teamData.teamMembers.filter(member =>
@@ -28,7 +31,7 @@ const TeamOverview = () => {
 
         const filteredName = [...filteredTeamLead, ...filteredTeamMembers];
 
-        if(filteredName.length === 0){
+        if (filteredName.length === 0) {
             setNoMemberFound(true);
             setFilteredItems([]);
         } else {
@@ -40,7 +43,7 @@ const TeamOverview = () => {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
 
-        if(event.target.value === '') {
+        if (event.target.value === '') {
             setNoMemberFound(false);
             setFilteredItems([]);
         }
@@ -48,7 +51,16 @@ const TeamOverview = () => {
 
     const handleSubmit = () => {
         filterItems(inputValue);
+        setCurrentPage(1);
     };
+
+    const handlePageChange = (pageNumber: number) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
     return (
         <Container>
@@ -70,19 +82,26 @@ const TeamOverview = () => {
                             navigationProps={teamData.teamLead}
                         />
                     )}
-                    <List
-                        items={MapMembers(
-                            filteredItems.length > 0
-                                ? filteredItems
-                                : teamData?.teamMembers ?? []
-                        )}
-                        isLoading={isLoading}
-                        type="member"
-                    />
+                        <List
+                            items={MapMembers(
+                                currentItems.length > 0
+                                    ? currentItems
+                                    : teamData?.teamMembers ?? []
+                            )}
+                            isLoading={isLoading}
+                            type="member"
+                        />
                 </React.Fragment>
             )}
+            <Pagination
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                totalItems={teamData?.teamMembers?.length}
+                onPageChange={handlePageChange}
+            />
         </Container>
     );
 };
+
 
 export default TeamOverview;
