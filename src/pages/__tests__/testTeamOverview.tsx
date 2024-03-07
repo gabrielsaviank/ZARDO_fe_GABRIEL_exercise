@@ -32,9 +32,7 @@ describe('TeamOverview', () => {
     });
 
     it('renders loading state', () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        useTeamData.mockReturnValue({
+        (useTeamData as jest.Mock).mockReturnValue({
             teamData: null,
             isLoading: true,
         });
@@ -46,13 +44,16 @@ describe('TeamOverview', () => {
 
 
     it('should render team overview users', async () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        useTeamData.mockReturnValue({
-            teamData: {
-                teamLead: {id: 'lead-id', firstName: 'Zabriel', lastName: 'Gardo'},
-                teamMembers: [{id: 'member-id', firstName: 'Genato', lastName: 'Rregorio'}],
-            },
+        const mockTeamData = {
+            teamLead: {id: 'lead-id', firstName: 'Zabriel', lastName: 'Gardo'},
+            teamMembers: [
+                {id: '1', firstName: 'Genato', lastName: 'Rregorio'},
+                {id: '2', firstName: 'Sabriel', lastName: 'Gavian'},
+            ],
+        };
+
+        (useTeamData as jest.Mock).mockReturnValue({
+            teamData: mockTeamData,
             isLoading: false,
         });
 
@@ -63,16 +64,16 @@ describe('TeamOverview', () => {
     });
 
     it('should filter an user', async () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        useTeamData.mockReturnValue({
-            teamData: {
-                teamLead: {id: 'lead-id', firstName: 'Zabriel', lastName: 'Gardo'},
-                teamMembers: [
-                    {id: '1', firstName: 'Genato', lastName: 'Rregorio'},
-                    {id: '2', firstName: 'Sabriel', lastName: 'Gavian'},
-                ],
-            },
+        const mockTeamData = {
+            teamLead: {id: 'lead-id', firstName: 'Zabriel', lastName: 'Gardo'},
+            teamMembers: [
+                {id: '1', firstName: 'Genato', lastName: 'Rregorio'},
+                {id: '2', firstName: 'Sabriel', lastName: 'Gavian'},
+            ],
+        };
+
+        (useTeamData as jest.Mock).mockReturnValue({
+            teamData: mockTeamData,
             isLoading: false,
         });
 
@@ -89,16 +90,16 @@ describe('TeamOverview', () => {
     });
 
     it('navigates when clicking on a card', async () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        useTeamData.mockReturnValue({
-            teamData: {
-                teamLead: {id: 'lead-id', firstName: 'Zabriel', lastName: 'Gardo'},
-                teamMembers: [
-                    {id: '1', firstName: 'Genato', lastName: 'Rregorio'},
-                    {id: '2', firstName: 'Sabriel', lastName: 'Gavian'},
-                ],
-            },
+        const mockTeamData = {
+            teamLead: {id: 'lead-id', firstName: 'Zabriel', lastName: 'Gardo'},
+            teamMembers: [
+                {id: '1', firstName: 'Genato', lastName: 'Rregorio'},
+                {id: '2', firstName: 'Sabriel', lastName: 'Gavian'},
+            ],
+        };
+
+        (useTeamData as jest.Mock).mockReturnValue({
+            teamData: mockTeamData,
             isLoading: false,
         });
 
