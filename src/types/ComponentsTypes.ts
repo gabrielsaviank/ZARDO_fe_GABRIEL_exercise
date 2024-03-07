@@ -35,3 +35,10 @@ export type TextInputType = {
     value?: string;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
+
+export type PaginationType = {
+    currentPage?: number;
+    itemsPerPage?: number;
+    totalItems?: number;
+    onPageChange?: (pageNumber: number) => void;
+}

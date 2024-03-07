@@ -6,15 +6,9 @@ import {
     PageLink,
     PageList,
 } from './styles';
+import {PaginationType} from '../../types/ComponentsTypes';
 
-interface PaginationProps {
-    currentPage: number;
-    itemsPerPage: number;
-    totalItems: number;
-    onPageChange: (pageNumber: number) => void;
-}
-
-export const Pagination: React.FC<PaginationProps> = (
+export const Pagination: React.FC<PaginationType> = (
     {
         currentPage,
         itemsPerPage,

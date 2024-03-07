@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div<{ hasNavigation: boolean }>`
     display: flex;
@@ -19,8 +19,10 @@ export const Container = styled.div<{ hasNavigation: boolean }>`
     }
 `;
 
-export const Content = styled.div<{ cardStyle: string }>`
+export const Content = styled.div`
     display: flex;
+    align-items: center;
+    margin-bottom: 5px;
 `;
 
 export const TeamContent = styled.div<{ cardStyle: string }>`
@@ -36,5 +38,4 @@ export const Title = styled.h2`
 export const Text = styled.p`
     font-size: 13px;
     line-height: 1.4;
-    margin-bottom: 2px;
 `;

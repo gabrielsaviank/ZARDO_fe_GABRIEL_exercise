@@ -2,6 +2,7 @@ import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Container, Title, Text, Content, TeamContent} from './styles';
 import {CardType} from '../../types/ComponentsTypes';
+import {columnFormatter} from '../../helpers/columnFormatter';
 
 export const Card = ({
      id,
@@ -22,7 +23,7 @@ export const Card = ({
                 </TeamContent>
             ) : (
                 <Content key={columnKey}>
-                    <Title>{columnKey}</Title>
+                    <Title>{columnFormatter(columnKey)}</Title>
                     <Text>{value}</Text>
                 </Content>
             )

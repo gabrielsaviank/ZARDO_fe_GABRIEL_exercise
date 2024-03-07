@@ -1,10 +1,10 @@
-import * as React from 'react';
 import {useLocation} from 'react-router-dom';
-import {useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {Card} from '../components/Card';
-import {Container} from '../components/GlobalComponents';
+import {UserContainer} from '../components/GlobalComponents';
 import {Header} from '../components/Header';
 import {MapUser} from '../helpers/columnGenerators';
+import {Pagination} from '../components/Pagination/Pagination';
 
 
 const UserOverview = () => {
@@ -24,12 +24,17 @@ const UserOverview = () => {
     }, [user]);
 
     return (
-        <Container>
+        <UserContainer>
             <Header
                 title={`User ${user.firstName} ${user.lastName}`}
             />
             {renderUserDetails}
-        </Container>
+            <Pagination
+                currentPage={1}
+                itemsPerPage={1}
+                totalItems={0}
+            />
+        </UserContainer>
     );
 };
 
