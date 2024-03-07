@@ -62,7 +62,7 @@ describe('TeamOverview', () => {
         expect(screen.getByText('Genato Rregorio')).toBeInTheDocument();
     });
 
-    it('handle filters and submission', async () => {
+    it('should filter an user', async () => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         useTeamData.mockReturnValue({
