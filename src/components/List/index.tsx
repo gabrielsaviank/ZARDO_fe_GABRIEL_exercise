@@ -1,21 +1,21 @@
 import * as React from 'react';
-import {ListItem} from 'types';
-import Card from '../Card';
+import {Card} from '../Card';
 import {Spinner} from '../Spinner';
 import {Container} from './styles';
+import {ListType} from '../../types/ComponentsTypes';
 
-interface Props {
-    items?: ListItem[];
-    hasNavigation?: boolean;
-    isLoading: string;
-}
-
-const List = ({items, hasNavigation = true, isLoading}: Props) => {
+export const List = ({items, hasNavigation = true, isLoading, type}: ListType) => {
     return (
         <Container>
             {isLoading && <Spinner />}
             {!isLoading &&
-                items.map(({url, id, columns, navigationProps}, index) => {
+                items.map((
+                    {
+                        url,
+                        id,
+                        columns,
+                        navigationProps}, index
+                ) => {
                     return (
                         <Card
                             key={`${id}-${index}`}
@@ -24,11 +24,10 @@ const List = ({items, hasNavigation = true, isLoading}: Props) => {
                             navigationProps={navigationProps}
                             hasNavigation={hasNavigation}
                             url={url}
+                            cardStyle={type}
                         />
                     );
                 })}
         </Container>
     );
 };
-
-export default List;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
-import Header from '..';
+import {Header} from '..';
 
 const mockUseNavigate = jest.fn();
 
@@ -46,5 +46,23 @@ describe('Header', () => {
         fireEvent.click(screen.getByRole('button'));
 
         expect(mockUseNavigate).toHaveBeenCalled();
+    });
+
+    it('should render submit button and input filter in the header', () => {
+        const handleInputChange = jest.fn();
+        const handleSubmit = jest.fn();
+
+        render(
+            <Header
+                title="Header"
+                inputValue="test value"
+                onInputChange={handleInputChange}
+                onSubmit={handleSubmit}
+                hasFilters
+            />
+        );
+
+        expect(screen.getByRole('textbox')).toBeInTheDocument();
+        expect(screen.getByTestId('submit-filter')).toBeInTheDocument();
     });
 });

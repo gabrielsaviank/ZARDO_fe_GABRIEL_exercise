@@ -1,37 +1,40 @@
-import * as React from 'react';
 import {useLocation} from 'react-router-dom';
-import {UserData} from 'types';
-import Card from '../components/Card';
-import {Container} from '../components/GlobalComponents';
-import Header from '../components/Header';
+import React, {useMemo} from 'react';
+import {Card} from '../components/Card';
+import {UserContainer} from '../components/GlobalComponents';
+import {Header} from '../components/Header';
+import {MapUser} from '../helpers/columnGenerators';
+import {Pagination} from '../components/Pagination/Pagination';
 
-var mapU = (user: UserData) => {
-    var columns = [
-        {
-            key: 'Name',
-            value: `${user.firstName} ${user.lastName}`,
-        },
-        {
-            key: 'Display Name',
-            value: user.displayName,
-        },
-        {
-            key: 'Location',
-            value: user.location,
-        },
-    ];
-    return <Card columns={columns} hasNavigation={false} navigationProps={user} />;
-};
 
 const UserOverview = () => {
     const location = useLocation();
-    return (
-        <Container>
-            <Header
-                title={`User ${location.state.firstName} ${location.state.lastName}`}
+    const user = location.state;
+
+    const renderUserDetails = useMemo(() => {
+        const columns = MapUser(user);
+
+        return (
+            <Card
+                columns={columns}
+                hasNavigation={false}
+                navigationProps={user}
             />
-            {mapU(location.state)}
-        </Container>
+        );
+    }, [user]);
+
+    return (
+        <UserContainer>
+            <Header
+                title={`User ${user.firstName} ${user.lastName}`}
+            />
+            {renderUserDetails}
+            <Pagination
+                currentPage={1}
+                itemsPerPage={1}
+                totalItems={0}
+            />
+        </UserContainer>
     );
 };
 

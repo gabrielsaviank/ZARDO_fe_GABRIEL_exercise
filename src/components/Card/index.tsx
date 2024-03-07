@@ -1,27 +1,34 @@
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Teams, UserData} from 'types';
-import {Container} from './styles';
+import {Container, Title, Text, Content, TeamContent} from './styles';
+import {CardType} from '../../types/ComponentsTypes';
+import {columnFormatter} from '../../helpers/columnFormatter';
 
-interface Props {
-    id?: string;
-    url?: string;
-    columns: Array<{
-        key: string;
-        value: string;
-    }>;
-    hasNavigation?: boolean;
-    navigationProps?: UserData | Teams;
-}
-
-const Card = ({
-    id,
-    columns,
-    url,
-    hasNavigation = true,
-    navigationProps = null,
-}: Props): JSX.Element => {
+export const Card = ({
+     id,
+     columns,
+     url,
+     hasNavigation = true,
+     navigationProps = null,
+     cardStyle,
+ }: CardType): JSX.Element => {
     const navigate = useNavigate();
+
+    const renderColumns = () => {
+        return columns.map(({key: columnKey, value}) => (
+            cardStyle === 'team' ? (
+                <TeamContent key={columnKey}>
+                    <Title>‍👥 Team</Title>
+                    <Text style={{color: '#5c5c5c'}}>{value}</Text>
+                </TeamContent>
+            ) : (
+                <Content key={columnKey}>
+                    <Title>{columnFormatter(columnKey)}</Title>
+                    <Text>{value}</Text>
+                </Content>
+            )
+        ));
+    };
 
     return (
         <Container
@@ -36,13 +43,7 @@ const Card = ({
                 e.preventDefault();
             }}
         >
-            {columns.map(({key: columnKey, value}) => (
-                <p key={columnKey}>
-                    <strong>{columnKey}</strong>&nbsp;{value}
-                </p>
-            ))}
+            {renderColumns()}
         </Container>
     );
 };
-
-export default Card;

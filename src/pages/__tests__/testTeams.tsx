@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {fireEvent, render, screen, waitFor, act} from '@testing-library/react';
-import * as API from '../../api';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import Teams from '../Teams';
+import {TeamsType} from '../../types';
+import TeamsContext from '../../contexts/TeamsContext';
 
 jest.mock('react-router-dom', () => ({
     useLocation: () => ({
@@ -12,6 +13,7 @@ jest.mock('react-router-dom', () => ({
             location: 'location',
         },
     }),
+
     useNavigate: () => ({}),
 }));
 
@@ -29,11 +31,21 @@ describe('Teams', () => {
     });
 
     it('should render spinner while loading', async () => {
-        // TODO - Add code for this test
+        const isLoading = true;
+
+        render(
+            <TeamsContext.Provider value={{teams: [], isLoading}}>
+                <Teams/>
+            </TeamsContext.Provider>
+        );
+
+        await waitFor(() => {
+           expect(screen.getByTestId('spinner')).toBeInTheDocument();
+        });
     });
 
     it('should render teams list', async () => {
-        jest.spyOn(API, 'getTeams').mockResolvedValue([
+        const teams: TeamsType[] = [
             {
                 id: '1',
                 name: 'Team1',
@@ -42,13 +54,50 @@ describe('Teams', () => {
                 id: '2',
                 name: 'Team2',
             },
-        ]);
+        ];
+        const isLoading = false;
 
-        render(<Teams />);
+        render(
+            <TeamsContext.Provider value={{teams, isLoading}}>
+                <Teams />
+            </TeamsContext.Provider>
+        );
 
         await waitFor(() => {
             expect(screen.getByText('Team1')).toBeInTheDocument();
         });
-        expect(screen.getByText('Team2')).toBeInTheDocument();
+
+        await waitFor(() => {
+            expect(screen.getByText('Team2')).toBeInTheDocument();
+        });
+    });
+
+    it('should filter a team', async () => {
+        const teams: TeamsType[] = [
+            {
+                id: '1',
+                name: 'Team1',
+            },
+            {
+                id: '2',
+                name: 'Team2',
+            },
+        ];
+        const isLoading = false;
+
+        render(
+            <TeamsContext.Provider value={{teams, isLoading}}>
+                <Teams />
+            </TeamsContext.Provider>
+        );
+
+        const inputElement = screen.getByPlaceholderText('Filter results');
+        fireEvent.change(inputElement, {target: {value: 'Team1'}});
+
+        fireEvent.submit(screen.getByTestId('submit-filter'));
+
+        await waitFor(() => {
+            expect(screen.getByText('Team1')).toBeInTheDocument();
+        });
     });
 });
